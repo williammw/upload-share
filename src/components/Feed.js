@@ -2,14 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, FlatList, Animated, PanResponder  } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { dummyData } from '../util/dummy';
-
+import { PinchGestureHandler, State } from 'react-native-gesture-handler';
 // import { PinchZoomView } from 'react-native-pinch-zoom-view';
 
 // import { ViewPropTypes } from 'deprecated-react-native-prop-types';
 const Feed = () => {
   const [posts, setPosts] = useState([]);
-  const [scale, setScale] = useState(1);
 
+
+  
 useEffect(() => {
     const fetchData = async () => {
       try {
@@ -22,7 +23,8 @@ useEffect(() => {
     };
 
     fetchData();
-  }, []);
+}, []);
+  
   
 const renderPost = ({ item }) => {
   return (
@@ -37,12 +39,16 @@ const renderPost = ({ item }) => {
         <Text style={styles.name}>{item.username}</Text>
         
       </View>
-      <Image
-        source={{
-          uri: item.image,
-        }}
-        style={styles.image}
-      />
+      
+
+        <Image
+          source={{
+            uri: item.image,
+          }}
+          style={styles.image}
+        />
+
+  
 
       <View style={styles.actions}>
         <TouchableOpacity  >
@@ -67,6 +73,7 @@ const renderPost = ({ item }) => {
     </View>
   );
 };
+
   
   
   return (
