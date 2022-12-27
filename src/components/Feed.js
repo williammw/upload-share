@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, FlatList } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, FlatList, Animated, PanResponder  } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { dummyData } from '../util/dummy';
 
+// import { PinchZoomView } from 'react-native-pinch-zoom-view';
 
+// import { ViewPropTypes } from 'deprecated-react-native-prop-types';
 const Feed = () => {
-const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState([]);
+  const [scale, setScale] = useState(1);
 
 useEffect(() => {
     const fetchData = async () => {
@@ -32,6 +35,7 @@ const renderPost = ({ item }) => {
           style={styles.avatar}
         />
         <Text style={styles.name}>{item.username}</Text>
+        
       </View>
       <Image
         source={{
@@ -39,15 +43,16 @@ const renderPost = ({ item }) => {
         }}
         style={styles.image}
       />
+
       <View style={styles.actions}>
-        <TouchableOpacity>
-          <MaterialCommunityIcons name="heart" size={30} color="#000" />
+        <TouchableOpacity  >
+          <MaterialCommunityIcons name="heart-outline" size={30} color="black" />
         </TouchableOpacity>
         <TouchableOpacity>
-          <MaterialCommunityIcons name="comment" size={30} color="#000" />
+          <MaterialCommunityIcons name="comment-outline" size={30} color="black" />
         </TouchableOpacity>
         <TouchableOpacity>
-          <MaterialCommunityIcons name="send" size={30} color="#000" />
+          <MaterialCommunityIcons name="share-outline" size={30} color="black" />
         </TouchableOpacity>
       </View>
       <Text style={styles.likes}>{item.likes} likes</Text>
@@ -76,6 +81,7 @@ const renderPost = ({ item }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    // backgroundColor:'black',
   },
   header: {
     flexDirection: 'row',
@@ -118,6 +124,7 @@ const styles = StyleSheet.create({
   commentUsername: {
     fontWeight: 'bold',
   },
+  
 });
 
 
