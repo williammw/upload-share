@@ -1,67 +1,59 @@
-import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
-import Feed from './src/Feed';
-const Header = () => {
-  return (
-    <View style={styles.header}>
-      <Text style={styles.headerText}>IG Header</Text>
-    </View>
-  );
-};
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import Header from './src/components/Header';
+// import Feed from './src/components/Feed';
+import Profile from './src/components/Profile';
+import LandingPage from './src/pages/LandingPage';
+import { View, Text, StyleSheet, Image, SafeAreaView } from 'react-native';
 
-const Profile = () => {
-  return (
-    <View style={styles.profile}>
-      <Text style={styles.profileText}>IG cProfile</Text>
-    </View>
-  );
-};
+import HomePage from './src/pages/HomePage';
+const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
+
 
 const App = () => {
   return (
-    <View style={styles.container}>
-      <Header />
-      <Feed />
-      <Profile />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <NavigationContainer>
+        <Tab.Navigator>
+          <Tab.Screen
+            name="LandingPage"
+            component={LandingPage}
+            options={{
+            tabBarLabel: 'LnadingPage',
+            // tabBarIcon: ({ color, size }) => (
+            //   <MaterialCommunityIcons name="account" color={color} size={size} />
+            //   ),
+            headerShown:false,
+          }}
+          />
+          <Tab.Screen name="HomePage" component={HomePage} options={{
+            tabBarLabel: 'HomePage',
+            // tabBarIcon: ({ color, size }) => (
+            //   <MaterialCommunityIcons name="account" color={color} size={size} />
+            // ),
+            headerShown:false,
+          }} />
+          <Tab.Screen name="Header" component={Header} options={{
+            tabBarLabel: 'Header',
+            // tabBarIcon: ({ color, size }) => (
+            //   <MaterialCommunityIcons name="account" color={color} size={size} />
+            // ),
+            headerShown:false,
+          }} />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  header: {
-    height: 60,
-    backgroundColor: '#333',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  headerText: {
-    color: '#fff',
-    fontSize: 20,
-  },
-  feed: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  feedImage: {
-    width: 200,
-    height: 200,
-  },
-  feedText: {
-    fontSize: 20,
-  },
-  profile: {
-    height: 60,
-    backgroundColor: '#333',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  profileText: {
-    color: '#fff',
-    fontSize: 20,
+    backgroundColor: 'black',
+    // statusBar:'light'
   },
 });
 
